@@ -23,28 +23,45 @@
       line-height: 1.6;
     }
 
-    /* ── Alert definition — design element ── */
+    /* ── Alert definition — dictionary style ── */
     .alert-def {
-      border-left: 3px solid var(--purple);
-      padding: 10px 0 10px 16px;
+      border-top: 2px solid #111;
+      border-bottom: 1px solid #ccc;
+      padding: 20px 0 22px;
       margin-bottom: 56px;
     }
 
     .alert-def-word {
-      display: block;
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: lowercase;
-      color: var(--purple);
-      margin-bottom: 5px;
+      display: inline;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: #111;
     }
 
-    .alert-def-text {
-      font-size: 16px;
+    .alert-def-pronunciation {
+      display: inline;
+      font-size: 18px;
       color: var(--muted);
-      font-style: italic;
+      margin-left: 8px;
     }
+
+    .alert-def-pos {
+      display: inline;
+      font-size: 18px;
+      font-style: italic;
+      color: var(--muted);
+      margin-left: 6px;
+    }
+
+    .alert-def-body {
+      display: block;
+      margin-top: 8px;
+      font-size: 20px;
+      color: #333;
+      line-height: 1.5;
+    }
+
 
     /* ── Main Content ── */
     .content {
@@ -206,10 +223,10 @@
 
   <main class="content">
 
-    <!-- Alert definition — design element -->
+    <!-- Alert definition — dictionary style -->
     <div class="alert-def">
-      <span class="alert-def-word">alert</span>
-      <span class="alert-def-text">quick to see, understand and act when facing danger</span>
+      <span class="alert-def-word">alert</span><span class="alert-def-pos">adj.</span>
+      <span class="alert-def-body">quick to see, understand and act when facing danger</span>
     </div>
 
     <p class="eyebrow">A Statement from Concerned Professionals</p>
