@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>We Are Alert</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple-light: #A78BFA;
+      --purple:       #7C3AED;
+      --purple-dark:  #4C1D95;
+      --text:         #111;
+      --muted:        #666;
+      --bg:           #FAFAF8;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── Alert definition — design element ── */
+    .alert-def {
+      border-left: 3px solid var(--purple);
+      padding: 10px 0 10px 16px;
+      margin-bottom: 56px;
+    }
+
+    .alert-def-word {
+      display: block;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: lowercase;
+      color: var(--purple);
+      margin-bottom: 5px;
+    }
+
+    .alert-def-text {
+      font-size: 16px;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── Main Content ── */
+    .content {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 72px 32px 56px;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 8vw, 68px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 40px;
+      color: var(--text);
+    }
+
+    .body-copy p {
+      font-size: 18px;
+      margin-bottom: 22px;
+      color: #222;
+    }
+
+    .body-copy a {
+      color: var(--purple);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* ── Frame Tool ── */
+    .tool-section {
+      margin: 60px 0 20px;
+      padding: 40px 36px;
+      background: white;
+      border: 2px solid var(--purple-light);
+      border-radius: 6px;
+    }
+
+    .tool-section h2 {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+
+    .tool-layout {
+      display: flex;
+      gap: 36px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .canvas-wrap { flex-shrink: 0; }
+
+    #previewCanvas {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .tool-controls {
+      flex: 1;
+      min-width: 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .tool-controls p {
+      font-size: 15px;
+      color: #444;
+      line-height: 1.55;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: opacity 0.15s;
+      text-align: center;
+    }
+
+    .btn:hover { opacity: 0.85; }
+
+    .btn-primary {
+      background: var(--purple);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: var(--purple-dark);
+      color: white;
+    }
+
+    .btn:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+
+    #fileInput { display: none; }
+
+    .tool-note {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── After tool ── */
+    .after-tool {
+      font-size: 13px;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 56px;
+      line-height: 1.6;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #ddd;
+      margin: 48px 0;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      padding-bottom: 72px;
+    }
+
+    .footer a { color: var(--muted); }
+
+    @media (max-width: 560px) {
+      .content { padding: 48px 20px 40px; }
+      .tool-section { padding: 28px 20px; }
+      .tool-layout { flex-direction: column; align-items: center; }
+      .tool-controls { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="content">
+
+    <!-- Alert definition — design element -->
+    <div class="alert-def">
+      <span class="alert-def-word">alert</span>
+      <span class="alert-def-text">quick to see, understand and act when facing danger</span>
+    </div>
+
+    <p class="eyebrow">A Statement from Concerned Professionals</p>
+
+    <h1>We Are Alert.</h1>
+
+    <div class="body-copy">
+      <p>We are professionals from across the political spectrum who share a profound concern: the democratic norms and institutions that underpin a stable society and a thriving economy are under serious threat.</p>
+
+      <p>We are not here to support or oppose any party, policy, or leader. We are here because professional silence helps normalize the erosion of American democracy and prosperity.</p>
+
+      <p>We are making our concern visible on LinkedIn by updating our profile photos with the WeAreAlert.org frame. Because we choose not to be silent.</p>
+
+      <p>When enough professionals make their values visible, it shifts norms. And norms are what prevent the misuse of power.</p>
+
+      <p><strong>Stand with us. Be alert.</strong></p>
+    </div>
+
+    <!-- LinkedIn Frame Tool -->
+    <div class="tool-section">
+      <h2>Add the Frame to Your LinkedIn Photo</h2>
+      <div class="tool-layout">
+        <div class="canvas-wrap">
+          <canvas id="previewCanvas" width="400" height="400"></canvas>
+        </div>
+        <div class="tool-controls">
+          <p>Upload your LinkedIn profile photo to add the WeAreAlert.org frame, then download and use it on LinkedIn.</p>
+          <input type="file" id="fileInput" accept="image/*" />
+          <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">Upload Your Photo</button>
+          <button class="btn btn-secondary" id="downloadBtn" disabled onclick="downloadImage()">Download Framed Photo</button>
+          <p class="tool-note">Your photo is processed entirely in your browser — it is never uploaded to any server.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="after-tool">We will stay alert — and continue to display this message — until we feel that our nation is on a better course.</p>
+
+    <hr />
+
+    <div class="footer">
+      <p>This initiative was started by a small group of professionals whose political views are mostly left of center. We say that openly because these principles belong to everyone, and because our impact grows when people across the political spectrum stand behind them.</p>
+      <br />
+      <p>Want to stay informed as this initiative grows? Drop us a note at <a href="mailto:hello@wearealert.org">hello@wearealert.org</a>.</p>
+    </div>
+
+  </main>
+
+  <script>
+    const canvas = document.getElementById('previewCanvas');
+    const ctx = canvas.getContext('2d');
+    const fileInput = document.getElementById('fileInput');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const SIZE = 400;
+
+    // Ring geometry
+    const OUTER_R  = SIZE / 2;
+    const RING_W   = 68;           // ring thickness
+    const INNER_R  = OUTER_R - RING_W;
+    const CX = SIZE / 2;
+    const CY = SIZE / 2;
+
+    let currentImage = null;
+
+    // Arc spans from ~8 o'clock (170°) counterclockwise to ~4 o'clock (10°) through bottom (90°)
+    // In canvas coords: 0=right, 90=bottom, 180=left, 270=top
+    const ARC_START = 195 * Math.PI / 180; // 9:30 o'clock
+    const ARC_END   =  45 * Math.PI / 180; // 4:30 o'clock
+    // Traversal is counterclockwise (decreasing angle) from ARC_START → 90° → ARC_END
+    const ARC_SPAN  = ARC_START - ARC_END;  // ~160° in radians
+    const PURPLE    = [142, 30, 170];        // warm purple, less blue
+
+    // ── Draw everything ──────────────────────────────────────────────
+    function drawAll(img) {
+      ctx.clearRect(0, 0, SIZE, SIZE);
+
+      // 1. Photo (or placeholder) clipped to full circle — ring overlays on top
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(CX, CY, OUTER_R, 0, Math.PI * 2);
+      ctx.clip();
+
+      if (img) {
+        const scale = Math.max(SIZE / img.width, SIZE / img.height);
+        const w = img.width * scale;
+        const h = img.height * scale;
+        ctx.drawImage(img, CX - w / 2, CY - h / 2, w, h);
+      } else {
+        ctx.fillStyle = '#E5E7EB';
+        ctx.fillRect(0, 0, SIZE, SIZE);
+        ctx.fillStyle = '#9CA3AF';
+        ctx.font = `${OUTER_R * 0.7}px sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('👤', CX, CY + OUTER_R * 0.05);
+      }
+      ctx.restore();
+
+      // 2. Partial arc ring with gradient fade at both ends
+      drawRingArc();
+
+      // 3. Text curved inside the ring band
+      drawRingText();
+    }
+
+    function drawRingArc() {
+      const segs      = 200;
+      const fadeShare = 0.25; // fraction of arc that fades in/out at each end
+
+      for (let i = 0; i < segs; i++) {
+        const t  = i / (segs - 1);
+        let alpha = 1;
+        if (t < fadeShare)        alpha = t / fadeShare;
+        else if (t > 1-fadeShare) alpha = (1 - t) / fadeShare;
+
+        // Angle decreases from ARC_START to ARC_END
+        const a1 = ARC_START - i       * (ARC_SPAN / segs);
+        const a2 = ARC_START - (i + 1) * (ARC_SPAN / segs);
+
+        ctx.beginPath();
+        ctx.arc(CX, CY, OUTER_R, a2, a1, false); // clockwise from a2→a1 (a1>a2)
+        ctx.arc(CX, CY, INNER_R, a1, a2, true);  // counterclockwise back
+        ctx.closePath();
+        ctx.fillStyle = `rgba(${PURPLE[0]},${PURPLE[1]},${PURPLE[2]},${alpha})`;
+        ctx.fill();
+      }
+    }
+
+    function drawRingText() {
+      const text     = 'WeAreAlert.org';
+      const fontSize = 40;
+      const font     = `700 ${fontSize}px -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif`;
+      const midR     = (OUTER_R + INNER_R) / 2;
+      const tracking = 2;
+
+      ctx.save();
+      ctx.font = font;
+      ctx.fillStyle    = 'white';
+      ctx.textAlign    = 'center';
+      ctx.textBaseline = 'middle';
+
+      // Measure chars
+      const chars    = text.split('');
+      const widths   = chars.map(c => ctx.measureText(c).width + tracking);
+      const textSpan = widths.reduce((a, b) => a + b, 0) / midR;
+
+      // Center text within the arc span
+      const arcMid = ARC_START - ARC_SPAN / 2;
+      let angle    = arcMid + textSpan / 2;
+
+      for (let i = 0; i < chars.length; i++) {
+        const charW     = widths[i] - tracking;
+        const charAngle = angle - charW / 2 / midR; // center of this char
+
+        ctx.save();
+        ctx.translate(CX + midR * Math.cos(charAngle), CY + midR * Math.sin(charAngle));
+        // θ - π/2 makes char tops point inward → text readable along bottom arc
+        ctx.rotate(charAngle - Math.PI / 2);
+        ctx.fillText(chars[i], 0, 0);
+        ctx.restore();
+
+        angle -= widths[i] / midR; // move right along arc (decreasing angle)
+      }
+
+      ctx.restore();
+    }
+
+    // Initial render
+    drawAll(null);
+
+    // ── File upload ──────────────────────────────────────────────────
+    fileInput.addEventListener('change', function (e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function (ev) {
+        const img = new Image();
+        img.onload = function () {
+          currentImage = img;
+          drawAll(img);
+          downloadBtn.disabled = false;
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function downloadImage() {
+      const link = document.createElement('a');
+      link.download = 'wearealert-linkedin.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+  </script>
+
+</body>
+</html>
