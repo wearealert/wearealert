@@ -245,13 +245,18 @@
 
     <!-- LinkedIn Frame Tool -->
     <div class="tool-section">
-      <h2>Add the Frame to Your LinkedIn Photo</h2>
+      <h2>Add the WeAreAlert.org ring to your LinkedIn profile photo</h2>
       <div class="tool-layout">
         <div class="canvas-wrap">
           <canvas id="previewCanvas" width="400" height="400"></canvas>
         </div>
         <div class="tool-controls">
-          <p>Upload your LinkedIn profile photo to add the WeAreAlert.org frame, then download and use it on LinkedIn.</p>
+          <ol style="font-size:15px; color:#444; line-height:1.8; padding-left:18px; margin-bottom:8px;">
+            <li>Go to <a href="https://www.linkedin.com/in/me/" target="_blank" rel="noopener">your LinkedIn profile</a> and click your photo</li>
+            <li>Select "View photo" and save it to your device</li>
+            <li>Upload it below and download the framed version</li>
+            <li>Return to LinkedIn, click your photo, and select "Change photo" to upload the new version</li>
+          </ol>
           <input type="file" id="fileInput" accept="image/*" />
           <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">Upload Your Photo</button>
           <button class="btn btn-secondary" id="downloadBtn" disabled onclick="downloadImage()">Download Framed Photo</button>
