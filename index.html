@@ -163,6 +163,23 @@
 
     .btn:hover { opacity: 0.85; }
 
+    .scheme-btn {
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 14px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      background: white;
+      color: #444;
+      cursor: pointer;
+    }
+    .scheme-btn.active {
+      background: #111;
+      color: white;
+      border-color: #111;
+    }
+
     .btn-primary {
       background: var(--purple);
       color: white;
@@ -249,6 +266,11 @@
       <div class="tool-layout">
         <div class="canvas-wrap">
           <canvas id="previewCanvas" width="400" height="400"></canvas>
+          <div style="display:flex; gap:8px; justify-content:center; margin-top:10px;">
+            <button class="scheme-btn active" data-scheme="purple" onclick="setScheme('purple', this)">Purple</button>
+            <button class="scheme-btn" data-scheme="white" onclick="setScheme('white', this)">White</button>
+            <button class="scheme-btn" data-scheme="black" onclick="setScheme('black', this)">Black</button>
+          </div>
         </div>
         <div class="tool-controls">
           <ol style="font-size:15px; color:#444; line-height:1.8; padding-left:18px; margin-bottom:8px;">
@@ -298,7 +320,19 @@
     const ARC_END   =  45 * Math.PI / 180; // 4:30 o'clock
     // Traversal is counterclockwise (decreasing angle) from ARC_START → 90° → ARC_END
     const ARC_SPAN  = ARC_START - ARC_END;  // ~160° in radians
-    const PURPLE    = [142, 30, 170];        // warm purple, less blue
+    const SCHEMES = {
+      purple: { ring: [142, 30, 170], text: 'white' },
+      white:  { ring: [255, 255, 255], text: 'black' },
+      black:  { ring: [17, 17, 17],   text: 'white' },
+    };
+    let currentScheme = 'black';
+
+    function setScheme(name, btn) {
+      currentScheme = name;
+      document.querySelectorAll('.scheme-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      drawAll(currentImage);
+    }
 
     // ── Draw everything ──────────────────────────────────────────────
     function drawAll(img) {
@@ -351,7 +385,8 @@
         ctx.arc(CX, CY, OUTER_R, a2, a1, false); // clockwise from a2→a1 (a1>a2)
         ctx.arc(CX, CY, INNER_R, a1, a2, true);  // counterclockwise back
         ctx.closePath();
-        ctx.fillStyle = `rgba(${PURPLE[0]},${PURPLE[1]},${PURPLE[2]},${alpha})`;
+        const c = SCHEMES[currentScheme].ring;
+        ctx.fillStyle = `rgba(${c[0]},${c[1]},${c[2]},${alpha})`;
         ctx.fill();
       }
     }
@@ -365,7 +400,7 @@
 
       ctx.save();
       ctx.font = font;
-      ctx.fillStyle    = 'white';
+      ctx.fillStyle    = SCHEMES[currentScheme].text;
       ctx.textAlign    = 'center';
       ctx.textBaseline = 'middle';
 
