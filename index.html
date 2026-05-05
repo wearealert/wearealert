@@ -168,6 +168,28 @@
       padding-bottom: 4px;
     }
 
+    .toggle-btns {
+      display: flex;
+      gap: 8px;
+    }
+
+    .toggle-btn {
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 5px 16px;
+      border: 1.5px solid #111;
+      border-radius: 20px;
+      background: white;
+      color: #111;
+      cursor: pointer;
+    }
+
+    .toggle-btn.active {
+      background: #111;
+      color: white;
+    }
+
     .tool-helper {
       font-size: 12px;
       color: #888;
@@ -240,11 +262,10 @@
 
     /* ── After tool ── */
     .after-tool {
-      font-size: 13px;
-      color: var(--muted);
-      text-align: center;
+      font-size: 18px;
+      color: #222;
       margin-bottom: 56px;
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
     hr {
@@ -306,9 +327,21 @@
         <div class="tool-controls">
 
           <div class="tool-step">
-            <span class="tool-step-label">Step 1 — Save your LinkedIn profile photo to your device</span>
-            <p style="font-size:15px; color:#222; line-height:1.6;"><strong>Desktop (Recommended):</strong> Go to <a href="https://www.linkedin.com/in/me/" target="_blank" rel="noopener">your LinkedIn profile</a>, right-click your photo, and select "Save Image As."<br><strong>Mobile:</strong> Open Safari or Chrome, type linkedin.com in the address bar (do not tap a link — it will open the app), go to your profile, tap and hold your photo, then save it.</p>
-            <span class="tool-step-label" style="margin-top:8px;">Step 2 — Upload and frame your photo</span>
+            <span class="tool-step-label">Step 1 — Save your LinkedIn photo to your device</span>
+            <div class="toggle-btns">
+              <button class="toggle-btn active" onclick="showDevice('desktop', this)">Desktop <span style="font-weight:400; font-size:11px;">(recommended)</span></button>
+              <button class="toggle-btn" onclick="showDevice('mobile', this)">Mobile</button>
+            </div>
+            <p id="instr-desktop" class="device-instr" style="font-size:15px; color:#222; line-height:1.6;">
+              Go to <a href="https://www.linkedin.com/in/me/" target="_blank" rel="noopener">your LinkedIn profile</a>, right-click your photo, and select "Save Image As."
+            </p>
+            <p id="instr-mobile" class="device-instr" style="font-size:15px; color:#222; line-height:1.6; display:none;">
+              Open Safari or Chrome and type linkedin.com in the address bar. Do not tap a link — it will open the app. Go to your profile, tap and hold your photo, and save it.
+            </p>
+          </div>
+
+          <div class="tool-step">
+            <span class="tool-step-label">Step 2 — Upload and frame your photo</span>
             <input type="file" id="fileInput" accept="image/*" />
             <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">Upload Your LinkedIn Photo</button>
             <p class="tool-note">Processed in your browser — your photo is never stored or shared.</p>
@@ -319,17 +352,9 @@
             <button class="btn btn-secondary" id="downloadBtn" disabled onclick="downloadImage()">Download Your Framed Photo</button>
           </div>
 
-          <div class="tool-step" id="linkedinSteps">
+          <div class="tool-step">
             <span class="tool-step-label">Step 4 — Upload to LinkedIn</span>
-            <ol class="upload-steps">
-              <li>Go to <a href="https://www.linkedin.com/in/me/" target="_blank" rel="noopener">your LinkedIn profile</a></li>
-              <li>Click your profile photo and select "Update"</li>
-              <li>Choose your new framed photo</li>
-            </ol>
-          </div>
-
-          <div class="completion-msg" id="completionMsg">
-            Your framed photo is ready to upload to LinkedIn.
+            <p style="font-size:15px; color:#222; line-height:1.6;">Go to <a href="https://www.linkedin.com/in/me/" target="_blank" rel="noopener">your LinkedIn profile</a>, click your photo, select "Update," and choose your new framed photo.</p>
           </div>
 
         </div>
@@ -487,6 +512,13 @@
       };
       reader.readAsDataURL(file);
     });
+
+    function showDevice(device, btn) {
+      document.querySelectorAll('.device-instr').forEach(el => el.style.display = 'none');
+      document.getElementById('instr-' + device).style.display = 'block';
+      document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
 
     function downloadImage() {
       const link = document.createElement('a');
