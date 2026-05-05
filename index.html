@@ -110,12 +110,26 @@
     }
 
     .tool-section h2 {
-      font-size: 13px;
+      font-size: 18px;
       font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 24px;
+      margin-bottom: 4px;
       color: var(--text);
+    }
+
+    .tool-subhead {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .tool-callout {
+      background: #f5f5f5;
+      border-left: 3px solid #111;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #333;
+      margin-bottom: 24px;
+      line-height: 1.5;
     }
 
     .tool-layout {
@@ -139,13 +153,47 @@
       min-width: 200px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 18px;
     }
 
-    .tool-controls p {
-      font-size: 15px;
+    .tool-step { display: flex; flex-direction: column; gap: 6px; }
+
+    .tool-step-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .tool-helper {
+      font-size: 12px;
+      color: #888;
+      line-height: 1.5;
+    }
+
+    .tool-note {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .completion-msg {
+      display: none;
+      font-size: 14px;
+      font-weight: 600;
+      color: #111;
+      padding: 12px 14px;
+      background: #f0f0f0;
+      border-left: 3px solid #111;
+    }
+
+    .upload-steps {
+      font-size: 14px;
       color: #444;
-      line-height: 1.55;
+      line-height: 1.8;
+      padding-left: 18px;
+      margin: 0;
     }
 
     .btn {
@@ -248,21 +296,42 @@
     <!-- LinkedIn Frame Tool -->
     <div class="tool-section">
       <h2>Add the We Are Alert Frame to Your LinkedIn Profile Photo</h2>
+      <p class="tool-subhead">Takes about 30 seconds. No login required.</p>
+      <div class="tool-callout">
+        <strong>Use a web browser</strong> (Safari, Chrome, or Firefox) — this will not work in the LinkedIn app.
+      </div>
       <div class="tool-layout">
         <div class="canvas-wrap">
           <canvas id="previewCanvas" width="400" height="400"></canvas>
         </div>
         <div class="tool-controls">
-          <ol style="font-size:15px; color:#444; line-height:1.8; padding-left:18px; margin-bottom:8px;">
-            <li>For best results, complete these steps on a desktop or laptop computer.<br><small style="color:#888;">Mobile users: visit <a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn.com</a> on your mobile browser — this cannot be done in the LinkedIn app.</small></li>
-            <li>Go to <a href="https://www.linkedin.com/in/me/" target="_blank" rel="noopener">your LinkedIn profile</a>, right-click your photo, and select "Save Image As"</li>
-            <li>Upload your photo (using button below), then download the framed version</li>
-            <li>Return to LinkedIn, click your profile photo, and select "Update" to upload the new version</li>
-          </ol>
-          <input type="file" id="fileInput" accept="image/*" />
-          <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">Upload Your Photo</button>
-          <button class="btn btn-secondary" id="downloadBtn" disabled onclick="downloadImage()">Download Framed Photo</button>
-          <p class="tool-note">Your photo is processed entirely in your browser — it is never uploaded to any server.</p>
+
+          <div class="tool-step">
+            <span class="tool-step-label">Step 1 — Upload your LinkedIn profile photo</span>
+            <input type="file" id="fileInput" accept="image/*" />
+            <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">Upload Your LinkedIn Photo</button>
+            <p class="tool-helper">To save your LinkedIn photo first: on desktop, right-click your photo → Save Image As. On mobile, tap and hold → Save Image.</p>
+            <p class="tool-note">Processed in your browser — your photo is never stored or shared.</p>
+          </div>
+
+          <div class="tool-step">
+            <span class="tool-step-label">Step 2 — Download your framed photo</span>
+            <button class="btn btn-secondary" id="downloadBtn" disabled onclick="downloadImage()">Download Your Framed Photo</button>
+          </div>
+
+          <div class="tool-step" id="linkedinSteps" style="display:none;">
+            <span class="tool-step-label">Step 3 — Upload to LinkedIn</span>
+            <ol class="upload-steps">
+              <li>Go to <a href="https://www.linkedin.com/in/me/" target="_blank" rel="noopener">your LinkedIn profile</a></li>
+              <li>Click your profile photo and select "Update"</li>
+              <li>Choose your new framed photo</li>
+            </ol>
+          </div>
+
+          <div class="completion-msg" id="completionMsg">
+            Your framed photo is ready to upload to LinkedIn.
+          </div>
+
         </div>
       </div>
     </div>
@@ -424,6 +493,8 @@
       link.download = 'wearealert-linkedin.png';
       link.href = canvas.toDataURL('image/png');
       link.click();
+      document.getElementById('linkedinSteps').style.display = 'block';
+      document.getElementById('completionMsg').style.display = 'block';
     }
   </script>
 
