@@ -159,11 +159,13 @@
     .tool-step { display: flex; flex-direction: column; gap: 6px; }
 
     .tool-step-label {
-      font-size: 11px;
+      font-size: 14px;
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: #111;
+      border-bottom: 2px solid #111;
+      padding-bottom: 4px;
     }
 
     .tool-helper {
@@ -305,7 +307,7 @@
 
           <div class="tool-step">
             <span class="tool-step-label">Step 1 — Save your LinkedIn profile photo to your device</span>
-            <p style="font-size:15px; color:#222; line-height:1.6;"><strong>Desktop:</strong> Go to <a href="https://www.linkedin.com/in/me/" target="_blank" rel="noopener">your LinkedIn profile</a>, right-click your photo, and select "Save Image As."<br><strong>Mobile:</strong> Open Safari or Chrome, type linkedin.com in the address bar (do not tap a link — it will open the app), go to your profile, tap and hold your photo, then save it.</p>
+            <p style="font-size:15px; color:#222; line-height:1.6;"><strong>Desktop (Recommended):</strong> Go to <a href="https://www.linkedin.com/in/me/" target="_blank" rel="noopener">your LinkedIn profile</a>, right-click your photo, and select "Save Image As."<br><strong>Mobile:</strong> Open Safari or Chrome, type linkedin.com in the address bar (do not tap a link — it will open the app), go to your profile, tap and hold your photo, then save it.</p>
             <span class="tool-step-label" style="margin-top:8px;">Step 2 — Upload and frame your photo</span>
             <input type="file" id="fileInput" accept="image/*" />
             <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">Upload Your LinkedIn Photo</button>
