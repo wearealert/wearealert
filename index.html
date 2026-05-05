@@ -297,9 +297,6 @@
     <div class="tool-section">
       <h2>Add the We Are Alert Frame to Your LinkedIn Profile Photo</h2>
       <p class="tool-subhead">Takes about 30 seconds. No login required.</p>
-      <div class="tool-callout">
-        <strong>Use a web browser</strong> (Safari, Chrome, or Firefox) — this will not work in the LinkedIn app.
-      </div>
       <div class="tool-layout">
         <div class="canvas-wrap">
           <canvas id="previewCanvas" width="400" height="400"></canvas>
@@ -307,20 +304,21 @@
         <div class="tool-controls">
 
           <div class="tool-step">
-            <span class="tool-step-label">Step 1 — Upload your LinkedIn profile photo</span>
+            <span class="tool-step-label">Step 1 — Save your LinkedIn profile photo to your device</span>
+            <p style="font-size:15px; color:#222; line-height:1.6;"><strong>Desktop:</strong> Go to <a href="https://www.linkedin.com/in/me/" target="_blank" rel="noopener">your LinkedIn profile</a>, right-click your photo, and select "Save Image As."<br><strong>Mobile:</strong> Open Safari or Chrome, type linkedin.com in the address bar (do not tap a link — it will open the app), go to your profile, tap and hold your photo, then save it.</p>
+            <span class="tool-step-label" style="margin-top:8px;">Step 2 — Upload and frame your photo</span>
             <input type="file" id="fileInput" accept="image/*" />
             <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">Upload Your LinkedIn Photo</button>
-            <p class="tool-helper">To save your LinkedIn photo first: on desktop, right-click your photo → Save Image As. On mobile, tap and hold → Save Image.</p>
             <p class="tool-note">Processed in your browser — your photo is never stored or shared.</p>
           </div>
 
           <div class="tool-step">
-            <span class="tool-step-label">Step 2 — Download your framed photo</span>
+            <span class="tool-step-label">Step 3 — Download your framed photo</span>
             <button class="btn btn-secondary" id="downloadBtn" disabled onclick="downloadImage()">Download Your Framed Photo</button>
           </div>
 
-          <div class="tool-step" id="linkedinSteps" style="display:none;">
-            <span class="tool-step-label">Step 3 — Upload to LinkedIn</span>
+          <div class="tool-step" id="linkedinSteps">
+            <span class="tool-step-label">Step 4 — Upload to LinkedIn</span>
             <ol class="upload-steps">
               <li>Go to <a href="https://www.linkedin.com/in/me/" target="_blank" rel="noopener">your LinkedIn profile</a></li>
               <li>Click your profile photo and select "Update"</li>
